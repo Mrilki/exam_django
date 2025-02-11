@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ course.title }}
+{% endblock %}
+{% block content %}
+    <div class="col d-flex justify-content-center">
+        <div class="card" style="width: 40rem;">
+            <div class="card-body">
+                {% if course.image %}
+                    <a href="{{ course.image.url }}" target="_blank">
+                        <img class="border-3 rounded img-fluid img-thumbnail mb-2 mx-auto d-block"
+                             src="{{ course.image.url }}">
+                    </a>
+                {% endif %}
+                <h5 class="card-title">{{ course.title }}</h5>
+                <p class="card-text">От автора {{ course.author }}</p>
+                <p class="card-text">{{ course.description|linebreaksbr }}</p>
+                <p class="card-text">Дата начала {{ course.start_date }}</p>
+                <p class="card-text">Дата конца {{ course.end_date }}</p>
+                <p class="card-text">Дата создания {{ course.created_at }}</p>
+                <p class="card-text">Дата изменения {{ course.updated_at }}</p>
+
+                {% if user == course.owner %}
+                    <div class="mb-2">
+                        <a class="btn btn-sm text-muted" href="{% url 'course:course_update' course.id %}" role="button">
+                            Отредактировать публикацию
+                        </a>
+                        <a class="btn btn-sm text-muted" href="{% url 'course:course_delete' course.id %}" role="button">
+                            Удалить публикацию
+                        </a>
+                    </div>
+                {% endif %}
+                {% include "review/reviews.html" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+курсы
+{% endblock %}
+{% block content %}
+    <form method="get" action="{% url 'course:index' %}" class="d-flex">
+    <input
+        type="text"
+        name="q"
+        placeholder="Поиск по названию и описанию"
+        class="form-control me-2"
+        value="{{ request.GET.q }}"
+    >
+    <button type="submit" class="btn btn-primary">Поиск</button>
+</form>
+  <h3 class="mb-5 text-center">Курсы</h3>
+  {% for course in course_list %}
+    <article class="mb-5">
+      {% include "includes/course_card.html" %}
+    </article>
+  {% endfor %}
+  {% include "includes/paginator.html" %}
+{% endblock %}

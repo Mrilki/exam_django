@@ -1,0 +1,18 @@
+<div class="col d-flex justify-content-center">
+  <div class="card" style="width: 40rem;">
+    <div class="card-body">
+      {% if course.image %}
+        <a href="{{ course.image.url }}" target="_blank">
+          <img class="border-3 rounded img-fluid img-thumbnail mb-2 mx-auto d-block" src="{{ course.image.url }}">
+        </a>
+      {% endif %}
+      <h5 class="card-title">{{ course.title }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        <small>
+          От автора {{ course.owner }}
+        </small>
+      </h6>
+      <a href="{% url 'course:course_detail' course.id %}" class="card-link">Открыть полное описание с отзывами</a>
+    </div>
+  </div>
+</div>
